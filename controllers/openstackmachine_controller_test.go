@@ -66,27 +66,31 @@ func TestOpenStackMachineSpecToOpenStackServerSpec(t *testing.T) {
 	}
 	portOpts := []infrav1.PortOpts{
 		{
-			Network: &infrav1.NetworkParam{
-				ID: ptr.To(openStackCluster.Status.Network.ID),
-			},
-			SecurityGroups: []infrav1.SecurityGroupParam{
-				{
-					ID: ptr.To(openStackCluster.Status.WorkerSecurityGroup.ID),
+			CommonPortOpts: infrav1.CommonPortOpts{
+				Network: &infrav1.NetworkParam{
+					ID: ptr.To(openStackCluster.Status.Network.ID),
+				},
+				SecurityGroups: []infrav1.SecurityGroupParam{
+					{
+						ID: ptr.To(openStackCluster.Status.WorkerSecurityGroup.ID),
+					},
 				},
 			},
 		},
 	}
 	portOptsWithAdditionalSecurityGroup := []infrav1.PortOpts{
 		{
-			Network: &infrav1.NetworkParam{
-				ID: ptr.To(openStackCluster.Status.Network.ID),
-			},
-			SecurityGroups: []infrav1.SecurityGroupParam{
-				{
-					ID: ptr.To(openStackCluster.Status.WorkerSecurityGroup.ID),
+			CommonPortOpts: infrav1.CommonPortOpts{
+				Network: &infrav1.NetworkParam{
+					ID: ptr.To(openStackCluster.Status.Network.ID),
 				},
-				{
-					ID: ptr.To(extraSecurityGroupUUID),
+				SecurityGroups: []infrav1.SecurityGroupParam{
+					{
+						ID: ptr.To(openStackCluster.Status.WorkerSecurityGroup.ID),
+					},
+					{
+						ID: ptr.To(extraSecurityGroupUUID),
+					},
 				},
 			},
 		},

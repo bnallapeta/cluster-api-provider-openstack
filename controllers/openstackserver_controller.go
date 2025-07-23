@@ -430,6 +430,10 @@ func getOrCreateServerPorts(openStackServer *infrav1alpha1.OpenStackServer, netw
 		return fmt.Errorf("creating ports: %w", err)
 	}
 
+	if err := networkingService.EnsureTrunkSubPorts(openStackServer, desiredPorts, resources); err != nil {
+		return fmt.Errorf("creating subports: %w", err)
+	}
+
 	return nil
 }
 

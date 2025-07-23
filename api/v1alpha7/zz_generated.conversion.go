@@ -1668,34 +1668,12 @@ func Convert_v1beta1_OpenStackMachineTemplateSpec_To_v1alpha7_OpenStackMachineTe
 }
 
 func autoConvert_v1alpha7_PortOpts_To_v1beta1_PortOpts(in *PortOpts, out *v1beta1.PortOpts, s conversion.Scope) error {
-	if in.Network != nil {
-		in, out := &in.Network, &out.Network
-		*out = new(v1beta1.NetworkParam)
-		if err := Convert_v1alpha7_NetworkFilter_To_v1beta1_NetworkParam(*in, *out, s); err != nil {
-			return err
-		}
-	} else {
-		out.Network = nil
-	}
-	if err := optional.Convert_string_To_optional_String(&in.NameSuffix, &out.NameSuffix, s); err != nil {
-		return err
-	}
-	if err := optional.Convert_string_To_optional_String(&in.Description, &out.Description, s); err != nil {
-		return err
-	}
+	// WARNING: in.Network requires manual conversion: does not exist in peer-type
+	// WARNING: in.NameSuffix requires manual conversion: does not exist in peer-type
+	// WARNING: in.Description requires manual conversion: does not exist in peer-type
 	// WARNING: in.AdminStateUp requires manual conversion: does not exist in peer-type
 	// WARNING: in.MACAddress requires manual conversion: does not exist in peer-type
-	if in.FixedIPs != nil {
-		in, out := &in.FixedIPs, &out.FixedIPs
-		*out = make([]v1beta1.FixedIP, len(*in))
-		for i := range *in {
-			if err := Convert_v1alpha7_FixedIP_To_v1beta1_FixedIP(&(*in)[i], &(*out)[i], s); err != nil {
-				return err
-			}
-		}
-	} else {
-		out.FixedIPs = nil
-	}
+	// WARNING: in.FixedIPs requires manual conversion: does not exist in peer-type
 	// WARNING: in.SecurityGroupFilters requires manual conversion: does not exist in peer-type
 	// WARNING: in.AllowedAddressPairs requires manual conversion: does not exist in peer-type
 	out.Trunk = (*bool)(unsafe.Pointer(in.Trunk))
@@ -1704,42 +1682,15 @@ func autoConvert_v1alpha7_PortOpts_To_v1beta1_PortOpts(in *PortOpts, out *v1beta
 	// WARNING: in.Profile requires manual conversion: does not exist in peer-type
 	// WARNING: in.DisablePortSecurity requires manual conversion: does not exist in peer-type
 	// WARNING: in.PropagateUplinkStatus requires manual conversion: does not exist in peer-type
-	out.Tags = *(*[]string)(unsafe.Pointer(&in.Tags))
+	// WARNING: in.Tags requires manual conversion: does not exist in peer-type
 	// WARNING: in.ValueSpecs requires manual conversion: does not exist in peer-type
 	return nil
 }
 
 func autoConvert_v1beta1_PortOpts_To_v1alpha7_PortOpts(in *v1beta1.PortOpts, out *PortOpts, s conversion.Scope) error {
-	if in.Network != nil {
-		in, out := &in.Network, &out.Network
-		*out = new(NetworkFilter)
-		if err := Convert_v1beta1_NetworkParam_To_v1alpha7_NetworkFilter(*in, *out, s); err != nil {
-			return err
-		}
-	} else {
-		out.Network = nil
-	}
-	if err := optional.Convert_optional_String_To_string(&in.Description, &out.Description, s); err != nil {
-		return err
-	}
-	if err := optional.Convert_optional_String_To_string(&in.NameSuffix, &out.NameSuffix, s); err != nil {
-		return err
-	}
-	if in.FixedIPs != nil {
-		in, out := &in.FixedIPs, &out.FixedIPs
-		*out = make([]FixedIP, len(*in))
-		for i := range *in {
-			if err := Convert_v1beta1_FixedIP_To_v1alpha7_FixedIP(&(*in)[i], &(*out)[i], s); err != nil {
-				return err
-			}
-		}
-	} else {
-		out.FixedIPs = nil
-	}
-	// WARNING: in.SecurityGroups requires manual conversion: does not exist in peer-type
-	out.Tags = *(*[]string)(unsafe.Pointer(&in.Tags))
 	out.Trunk = (*bool)(unsafe.Pointer(in.Trunk))
-	// WARNING: in.ResolvedPortSpecFields requires manual conversion: does not exist in peer-type
+	// WARNING: in.Subports requires manual conversion: does not exist in peer-type
+	// WARNING: in.CommonPortOpts requires manual conversion: does not exist in peer-type
 	return nil
 }
 

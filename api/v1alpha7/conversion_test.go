@@ -96,6 +96,12 @@ func TestFuzzyConversion(t *testing.T) {
 				// None of the following identityRef fields have ever been set in v1alpha7
 				identityRef.Region = ""
 			},
+			func(portOpts *infrav1.PortOpts, c fuzz.Continue) {
+				c.FuzzNoCustom(portOpts)
+
+				// None of the following PortOpts fields have ever been set in v1alpha7
+				portOpts.Subports = nil
+			},
 		}
 
 		return slices.Concat(v1alpha7FuzzerFuncs, testhelpers.InfraV1FuzzerFuncs())
