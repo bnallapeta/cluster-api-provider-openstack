@@ -82,7 +82,7 @@ type OpenStackIdentityReference struct {
     // +optional
     Name string `json:"name,omitempty"`
     
-    // CloudName required for Secret type, forbidden for ClusterIdentity type
+    // CloudName required for both types
     // +optional
     CloudName string `json:"cloudName,omitempty"`
     
@@ -195,7 +195,7 @@ type OpenStackIdentityReference struct {
 
 **CEL Validation Rules:**
 1. **Name Required**: `name` field is always required for both types
-2. **CloudName Logic**: Required for Secret type, forbidden for ClusterIdentity type
+2. **CloudName Logic**: Required for both Secret and ClusterIdentity types.
 3. **Type Safety**: Enum validation ensures only valid types are accepted
 
 ### Backward Compatibility
@@ -288,6 +288,7 @@ spec:
   identityRef:
     type: ClusterIdentity
     name: prod-openstack
+    cloudName: openstack
 ```
 
 ### Explicit Secret Type (optional)
